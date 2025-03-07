@@ -1,7 +1,7 @@
-from az_ai.example import hello_world
+from az_ai.cli import hello_world
 
 
 def test_hello_world(capsys):
     hello_world()
     captured = capsys.readouterr()
-    assert captured.out == "Hello World!\n"    
+    assert captured.out == "Hello World!\n"

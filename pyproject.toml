@@ -5,16 +5,26 @@ description = "AZ AI CLI"
 authors = [{name = "Dominique Broeglin", email = "dominique.broeglin@microsoft.com"}]
 license = {file="LICENSE"}
 readme = "README.md"
-requires-python = ">= 3.12"
+requires-python = ">= 3.11"
 dependencies = [
-    "typer[standard]>=0.15.2",
+    "azure-cli~=2.70.0",
+    "typer>=0.15.2",
 ]
+
+[project.scripts]
+"az-ai" = "az_ai.cli:app"
+
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
 
 [tool.uv]
 dev-dependencies = [
     "pytest>=8.3.5",
     "pytest-cov>=6.0.0",
 ]
+prerelease = "allow"
 
 [tool.pytest.ini_options]
 addopts = "--cov-branch --cov-report term --cov=core"

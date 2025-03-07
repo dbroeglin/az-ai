@@ -143,3 +143,5 @@ cython_debug/
 
 # Mac files
 .DS_Store
+
+.ruff_cache/
