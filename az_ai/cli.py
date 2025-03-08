@@ -1,8 +1,21 @@
+import logging
+
 import typer
-from azure.cli.core import get_default_cli
 from rich.console import Console
+from rich.logging import RichHandler
 from rich.markdown import Markdown
 from rich.table import Table
+
+import az_ai.logs
+from az_ai import util
+
+util.load_dotenv_from_azd()
+
+
+FORMAT = "%(message)s"
+logging.basicConfig(
+    level="NOTSET", format=FORMAT, datefmt="[%X]", handlers=[RichHandler()]
+)
 
 MARKDOWN = """
 # This is an h1
@@ -28,6 +41,8 @@ print("This is a code block")
 
 app = typer.Typer()
 console = Console()
+
+app.add_typer(az_ai.logs.app, name="logs", help="Show logs from the currently running Azure Container Apps Replica")
 
 
 @app.command()
@@ -57,9 +72,3 @@ def coucou():
     tree.add(Text("🐍 ") + text_filename)
 
     print(tree)
-
-
-@app.command()
-def az():
-    typer.echo("az command")
-    get_default_cli().invoke(["--version"])
